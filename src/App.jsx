@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import Lenis from 'lenis';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,7 +12,7 @@ import Education from './components/Education';
 import CurrentlyLearning from './components/CurrentlyLearning';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import useScrollspy from './hooks/useScrollSpy';
+import useScrollspy from './hooks/useScrollspy';
 
 function App() {
   const sectionIds = [
@@ -25,39 +24,24 @@ function App() {
     'problem-solving',
     'achievements',
     'education',
-    'currently-learning',
+    'learning',
     'contact',
   ];
 
   const activeSection = useScrollspy(sectionIds, 100);
 
-  // Initialize Lenis smooth scroll
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
+    // Set page metadata
+    document.title = 'Mrinal Singh - Computer Science Student & Aspiring Software Engineer';
+    document.querySelector('meta[name="description"]')?.setAttribute(
+      'content',
+      'Portfolio of Mrinal Singh - Computer Science Engineering student, full-stack developer, DSA enthusiast. Building practical software solutions.'
+    );
   }, []);
 
   return (
-    <div className="bg-dark-950 text-white overflow-hidden">
-      {/* Navigation */}
+    <div className="bg-dark-950 text-white">
       <Navbar activeSection={activeSection} />
-
-      {/* Main Content */}
       <main>
         <Hero />
         <About />
@@ -71,8 +55,6 @@ function App() {
         <CurrentlyLearning />
         <Contact />
       </main>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
