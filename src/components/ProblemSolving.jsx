@@ -56,8 +56,8 @@ const ProblemSolving = () => {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Current <span className="text-[#67E8F9]">DSA Focus</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF] mb-4">
+            Current <span className="text-[#FFFFFF]">DSA Focus</span>
           </h2>
 
           <div className="inline-block p-8 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/20 shadow-2xl shadow-black/60 mt-4">

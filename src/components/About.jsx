@@ -50,10 +50,15 @@ const About = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              About Me
+            </span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF] mb-4">
             Building Skills Through{' '}
-            <span className="text-[#67E8F9]">Problems</span> and{' '}
-            <span className="text-[#67E8F9]">Projects.</span>
+            <span className="text-[#FFFFFF]">Problems</span> and{' '}
+            <span className="text-[#FFFFFF]">Projects.</span>
           </h2>
         </motion.div>
 

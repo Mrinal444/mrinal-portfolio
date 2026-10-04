@@ -48,8 +48,13 @@ const Education = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Academic <span className="text-[#67E8F9]">Education</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              Formal Education
+            </span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF]">
+            Academic <span className="text-[#FFFFFF]">Education</span>
           </h2>
         </motion.div>
 

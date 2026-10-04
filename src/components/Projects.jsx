@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCheckCircle, FaRocket } from 'react-icons/fa';
 import projectsData from '../data/projects';
 
 const Projects = () => {
@@ -48,18 +48,20 @@ const Projects = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#67E8F9] shadow-[0_0_8px_#67E8F9]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#67E8F9] shadow-[0_0_8px_#67E8F9]" />
             <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
               Engineering Work & Problem Solving
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Featured <span className="text-[#67E8F9]">Projects</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF] mb-4">
+            Featured <span className="text-[#FFFFFF]">Projects</span>
           </h2>
-          <p className="text-[#E8F1FF] mt-4 text-lg font-medium max-w-2xl">
-            Practical software applications built with a focus on real-world utility, clean architecture, and structured problem-solving.
-          </p>
+          <div className="inline-block p-5 sm:p-6 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/18 shadow-xl shadow-black/50 max-w-2xl">
+            <p className="text-[#E8F1FF] text-base sm:text-lg font-medium leading-relaxed">
+              Practical software applications built with a focus on real-world utility, clean architecture, and structured problem-solving.
+            </p>
+          </div>
         </motion.div>
 
         {/* Projects Grid */}
@@ -147,6 +149,21 @@ const Projects = () => {
                         </div>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {/* Future Impact & Vision */}
+                {project.futureImpact && (
+                  <div className="p-4 rounded-xl bg-[#071737]/90 border border-white/12 backdrop-blur-md mb-6 shadow-inner">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <FaRocket className="w-3.5 h-3.5 text-[#67E8F9]" />
+                      <p className="text-xs font-bold uppercase tracking-wider text-[#67E8F9]">
+                        Future Impact & Potential
+                      </p>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#E8F1FF]/90 leading-relaxed font-normal">
+                      {project.futureImpact}
+                    </p>
                   </div>
                 )}
 

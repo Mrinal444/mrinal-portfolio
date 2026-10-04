@@ -14,6 +14,8 @@ const projects = [
       "Interactive data analytics dashboards with responsive UI",
       "Cloud backend architecture using Supabase and PostgreSQL for secure record management",
     ],
+    futureImpact:
+      "Transforms vocational training oversight by delivering verifiable longitudinal career analytics, pinpointing regional skill gaps, and optimizing policy ROI across nationwide workforce development programs.",
     tech: ["React.js", "Node.js", "Supabase", "PostgreSQL"],
     status: "Currently Building",
     github: "https://github.com/Mrinal444",
@@ -35,6 +37,8 @@ const projects = [
       "Real-time answer evaluation and instant score summary breakdown",
       "Progress monitoring dashboard for tracking accuracy and speed",
     ],
+    futureImpact:
+      "Scales to support thousands of technical aspirants with automated performance diagnostics, topic-level mastery tracking, and low-latency mock exam simulations that make high-quality preparation accessible.",
     tech: ["React.js", "JavaScript", "Tailwind CSS"],
     status: "In Development",
     github: "https://github.com/Mrinal444",
@@ -56,6 +60,8 @@ const projects = [
       "Cloud database integration utilizing Supabase and PostgreSQL",
       "Collaborative Git workflows and rapid agile feature delivery in a team setting",
     ],
+    futureImpact:
+      "Provides a scalable, cloud-first framework adaptable for rapid municipal governance and public grievance management, bridging citizens and administrators through transparent digital workflows.",
     tech: ["HTML5", "CSS3", "JavaScript", "Node.js", "Supabase", "PostgreSQL"],
     status: "Completed",
     github: "https://github.com/Mrinal444",

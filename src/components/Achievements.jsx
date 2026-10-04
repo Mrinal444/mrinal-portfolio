@@ -79,18 +79,20 @@ const Achievements = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <div className="flex items-center gap-2 mb-2">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
             <FaCertificate className="w-3.5 h-3.5 text-[#67E8F9]" />
             <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
               Recognition & Engagement
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Open Source & <span className="text-[#67E8F9]">Achievements</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF] mb-4">
+            Open Source & <span className="text-[#FFFFFF]">Achievements</span>
           </h2>
-          <p className="text-[#E8F1FF] mt-4 text-base sm:text-lg font-medium max-w-2xl">
-            Contributing to developer communities, building real-world collaboration skills, and validating technical capabilities.
-          </p>
+          <div className="inline-block p-5 sm:p-6 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/18 shadow-xl shadow-black/50 max-w-2xl">
+            <p className="text-[#E8F1FF] text-base sm:text-lg font-medium leading-relaxed">
+              Contributing to developer communities, building real-world collaboration skills, and validating technical capabilities.
+            </p>
+          </div>
         </motion.div>
 
         {/* Achievements Grid */}

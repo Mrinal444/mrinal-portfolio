@@ -126,12 +126,14 @@ const Contact = () => {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Let's Build Something <span className="text-[#67E8F9]">Interesting</span>.
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF] mb-4">
+            Let's Build Something <span className="text-[#FFFFFF]">Interesting</span>.
           </h2>
-          <p className="text-[#E8F1FF] text-base sm:text-lg font-medium max-w-2xl mx-auto">
-            I am open to software engineering internships, technical collaborations, hackathons, open-source projects, and engineering opportunities.
-          </p>
+          <div className="inline-block p-5 sm:p-6 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/18 shadow-xl shadow-black/50 max-w-2xl mx-auto">
+            <p className="text-[#E8F1FF] text-base sm:text-lg font-medium leading-relaxed">
+              I am open to software engineering internships, technical collaborations, hackathons, open-source projects, and engineering opportunities.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 mb-12">

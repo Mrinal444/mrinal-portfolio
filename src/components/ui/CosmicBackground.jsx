@@ -647,10 +647,10 @@ export const CosmicBackground = () => {
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full block pointer-events-none"
+        className="w-full h-full block pointer-events-none blur-[1px] scale-[1.005] transform-gpu"
       />
-      {/* Subtle radial cosmic vignette */}
-      <div className="absolute inset-0 bg-radial from-transparent via-transparent to-[#040409]/60 pointer-events-none" />
+      {/* Subtle depth vignette & cosmic atmosphere softening overlay */}
+      <div className="absolute inset-0 bg-radial from-transparent via-[#040409]/20 to-[#040409]/70 pointer-events-none" />
     </div>
   );
 };

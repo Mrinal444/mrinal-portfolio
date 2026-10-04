@@ -42,12 +42,19 @@ const CurrentlyLearning = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Currently <span className="text-[#67E8F9]">Exploring</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              Continuous Growth
+            </span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#FFFFFF] mb-4">
+            Currently <span className="text-[#FFFFFF]">Exploring</span>
           </h2>
-          <p className="text-[#E8F1FF] mt-4 text-lg font-medium">
-            Continuous learning and growth through new technologies and deeper understanding.
-          </p>
+          <div className="inline-block p-5 sm:p-6 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/18 shadow-xl shadow-black/50 max-w-2xl mx-auto">
+            <p className="text-[#E8F1FF] text-base sm:text-lg font-medium leading-relaxed">
+              Continuous learning and growth through new technologies and deeper understanding.
+            </p>
+          </div>
         </motion.div>
 
         {/* Learning Cards */}
