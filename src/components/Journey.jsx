@@ -1,34 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaGraduationCap } from 'react-icons/fa';
+import journeyData from '../data/journey';
 
 const Journey = () => {
-  const journeyData = [
-    {
-      year: '2024',
-      title: 'Beginning My Journey',
-      description:
-        'Started my Computer Science Engineering journey at KIIT and focused on building strong programming and web development fundamentals. Established a solid foundation in core CS concepts.',
-    },
-    {
-      year: '2025',
-      title: 'Expanding Horizons',
-      description:
-        'Expanded into Data Structures & Algorithms, full-stack development, participated in hackathons, and made meaningful open-source contributions. Strengthened problem-solving skills and real-world application development.',
-    },
-    {
-      year: '2026',
-      title: 'Building Impact',
-      description:
-        'Currently working on larger and more impactful projects including SkillOutcome and SSC JE Mock Test Platform. Focusing on advanced full-stack development and scalable solutions.',
-    },
-    {
-      year: 'Road Ahead',
-      title: 'Future Goals',
-      description:
-        'Aiming for software engineering internships, stronger DSA skills, full-stack expertise, open-source contributions, competitive programming, and building scalable real-world products that make a difference.',
-    },
-  ];
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -39,7 +14,7 @@ const Journey = () => {
   };
 
   return (
-    <section id="journey" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-900">
+    <section id="journey" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <motion.div
@@ -49,18 +24,25 @@ const Journey = () => {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <FaGraduationCap className="w-3.5 h-3.5 text-[#67E8F9]" />
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              Milestones & Timeline
+            </span>
+          </div>
+
           <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            My Development <span className="text-accent">Journey</span>
+            My Technical <span className="text-[#67E8F9]">Journey</span>
           </h2>
-          <p className="text-gray-400 mt-4 text-lg">
-            Growth through learning, building, and continuous improvement.
+          <p className="text-[#E8F1FF] mt-4 text-base sm:text-lg font-medium max-w-2xl mx-auto">
+            Growth through continuous learning, building practical software, solving challenging problems, and contributing to open-source communities.
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline Line */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent to-transparent -translate-x-1/2" />
+          {/* Central Line for Desktop */}
+          <div className="hidden lg:block absolute left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#67E8F9] via-[#6366F1]/60 to-transparent -translate-x-1/2" />
 
           {/* Timeline Items */}
           <div className="space-y-8 lg:space-y-12">
@@ -70,30 +52,58 @@ const Journey = () => {
                 variants={itemVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: '-100px' }}
-                className={`grid lg:grid-cols-2 gap-8 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+                viewport={{ once: true, margin: '-80px' }}
+                className={`grid lg:grid-cols-2 gap-8 items-center ${
+                  idx % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                }`}
               >
-                {/* Content */}
+                {/* Content Card */}
                 <div
-                  className={`p-6 rounded-xl bg-dark-800 border border-dark-700 hover:border-accent/40 transition-all ${
+                  className={`p-6 sm:p-8 rounded-2xl bg-[#071737]/80 backdrop-blur-md border border-white/18 hover:border-[#67E8F9]/50 shadow-xl shadow-black/50 transition-all ${
                     idx % 2 === 1 ? 'lg:col-start-2' : 'lg:col-start-1'
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-accent font-bold text-lg">{item.year}</span>
-                    <div className="hidden lg:block h-px flex-1 bg-gradient-to-r from-accent to-transparent" />
+                    <span className="text-[#67E8F9] font-bold text-lg tracking-wide">
+                      {item.year}
+                    </span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-[#67E8F9]/40 to-transparent" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{item.description}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+                    {item.title}
+                  </h3>
+                  {item.subtitle && (
+                    <p className="text-xs font-mono uppercase tracking-wider text-[#67E8F9] mb-3">
+                      {item.subtitle}
+                    </p>
+                  )}
+
+                  <p className="text-[#E8F1FF] leading-relaxed font-normal text-sm sm:text-base mb-4">
+                    {item.description}
+                  </p>
+
+                  {item.tags && item.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
+                      {item.tags.map((tag, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2.5 py-1 rounded-md bg-[#071737]/90 border border-white/12 text-[11px] font-medium text-[#E8F1FF]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Timeline Dot (Desktop Only) */}
-                <div className="hidden lg:flex justify-center">
-                  <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    className="w-6 h-6 rounded-full bg-accent border-4 border-dark-900 relative z-10"
-                  />
+                {/* Timeline Center Dot (Desktop Only) */}
+                <div
+                  className={`hidden lg:flex justify-center ${
+                    idx % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''
+                  }`}
+                >
+                  <div className="w-5 h-5 rounded-full bg-[#67E8F9] border-4 border-[#071737] relative z-10 shadow-[0_0_12px_#67E8F9]" />
                 </div>
               </motion.div>
             ))}

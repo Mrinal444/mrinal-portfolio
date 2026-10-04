@@ -24,14 +24,14 @@ const Stats = () => {
     return () => observer.disconnect();
   }, []);
 
-  const cgpa = useAnimatedCounter(93, 2000, isInView);
+  const cgpaRaw = useAnimatedCounter(93, 2000, isInView);
   const problems = useAnimatedCounter(200, 2000, isInView);
   const prs = useAnimatedCounter(6, 2000, isInView);
 
   const stats = [
     {
       label: 'CGPA',
-      value: cgpa,
+      value: (cgpaRaw / 10).toFixed(1),
       suffix: ' / 10',
       description: 'Strong Academic Foundation',
     },
@@ -76,7 +76,7 @@ const Stats = () => {
   };
 
   return (
-    <section ref={sectionRef} id="stats" className="py-16 px-4 sm:px-6 lg:px-8 bg-dark-950">
+    <section ref={sectionRef} id="stats" className="py-16 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -90,13 +90,13 @@ const Stats = () => {
               key={idx}
               variants={itemVariants}
               whileHover={{ translateY: -8 }}
-              className="group relative p-6 rounded-xl bg-gradient-to-br from-dark-800 to-dark-900 border border-dark-700 hover:border-accent/40 transition-all overflow-hidden"
+              className="group relative p-6 rounded-2xl bg-[#071737]/80 backdrop-blur-md border border-white/18 hover:border-[#67E8F9]/50 shadow-xl shadow-black/50 transition-all overflow-hidden"
             >
               {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#67E8F9]/0 via-[#67E8F9]/10 to-[#67E8F9]/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="text-accent text-xs font-semibold uppercase tracking-widest mb-2">
+                <div className="text-[#67E8F9] text-xs font-semibold uppercase tracking-widest mb-2">
                   {stat.label}
                 </div>
 
@@ -104,10 +104,10 @@ const Stats = () => {
                   <span className="text-4xl sm:text-5xl font-bold text-white">
                     {stat.value}
                   </span>
-                  <span className="text-lg text-gray-400">{stat.suffix}</span>
+                  <span className="text-lg text-[#67E8F9] font-semibold">{stat.suffix}</span>
                 </div>
 
-                <p className="text-sm text-gray-400">{stat.description}</p>
+                <p className="text-sm text-[#E8F1FF] font-medium">{stat.description}</p>
               </div>
             </motion.div>
           ))}

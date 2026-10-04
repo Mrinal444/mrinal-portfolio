@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import CosmicBackground from './components/ui/CosmicBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,23 +14,10 @@ import Education from './components/Education';
 import CurrentlyLearning from './components/CurrentlyLearning';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import useScrollspy from './hooks/useScrollSpy';
+import useScrollSpy from './hooks/useScrollSpy';
 
 function App() {
-  const sectionIds = [
-    'home',
-    'about',
-    'skills',
-    'projects',
-    'journey',
-    'problem-solving',
-    'achievements',
-    'education',
-    'currently-learning',
-    'contact',
-  ];
-
-  const activeSection = useScrollspy(sectionIds, 100);
+  const activeSection = useScrollSpy();
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -40,6 +28,8 @@ function App() {
       smoothTouch: false,
     });
 
+    window.__lenis = lenis;
+
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -49,16 +39,20 @@ function App() {
 
     return () => {
       lenis.destroy();
+      delete window.__lenis;
     };
   }, []);
 
   return (
-    <div className="bg-dark-950 text-white overflow-hidden">
+    <div className="relative min-h-screen bg-[#040409] text-white selection:bg-[#67E8F9] selection:text-[#020B1C]">
+      {/* Continuous 3D WebGL Cosmic Background across all pages */}
+      <CosmicBackground />
+
       {/* Navigation */}
       <Navbar activeSection={activeSection} />
 
       {/* Main Content */}
-      <main>
+      <main className="relative z-10 bg-transparent">
         <Hero />
         <About />
         <Stats />

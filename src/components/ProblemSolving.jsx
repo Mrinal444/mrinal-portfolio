@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaCode } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 
 const ProblemSolving = () => {
   const dsaTopics = [
@@ -22,14 +23,14 @@ const ProblemSolving = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.06,
         delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,
       scale: 1,
@@ -38,7 +39,7 @@ const ProblemSolving = () => {
   };
 
   return (
-    <section id="problem-solving" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-950">
+    <section id="problem-solving" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-5xl mx-auto">
         {/* Main Heading & Stat */}
         <motion.div
@@ -48,20 +49,29 @@ const ProblemSolving = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Problem Solving & <span className="text-accent">DSA</span>
-          </h2>
-
-          <div className="inline-block p-6 rounded-xl bg-gradient-to-br from-dark-800 to-dark-900 border border-accent/30 mt-6">
-            <div className="text-5xl sm:text-6xl font-bold text-accent mb-2">
-              200+
-            </div>
-            <p className="text-gray-300 text-lg">Problems Solved</p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <FaCode className="w-3.5 h-3.5 text-[#67E8F9]" />
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              Algorithmic Problem Solving
+            </span>
           </div>
 
-          <p className="text-gray-400 mt-8 text-lg max-w-2xl mx-auto leading-relaxed">
-            Consistently strengthening problem-solving skills through Data Structures and Algorithms practice. Building intuition for optimization and exploring multiple approaches to solve complex computational challenges.
-          </p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            Current <span className="text-[#67E8F9]">DSA Focus</span>
+          </h2>
+
+          <div className="inline-block p-8 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/20 shadow-2xl shadow-black/60 mt-4">
+            <div className="text-5xl sm:text-6xl font-extrabold text-[#67E8F9] mb-2 drop-shadow-[0_0_20px_rgba(103,232,249,0.4)]">
+              200+
+            </div>
+            <p className="text-white text-base sm:text-lg font-semibold">Problems Solved</p>
+          </div>
+
+          <div className="mt-8 px-6 py-5 rounded-2xl bg-[#071737]/80 backdrop-blur-md border border-white/18 shadow-xl shadow-black/50 max-w-2xl mx-auto">
+            <p className="text-[#E8F1FF] text-sm sm:text-base leading-relaxed font-normal">
+              Consistently strengthening problem-solving skills through Data Structures and Algorithms practice. Building intuition for optimization and exploring multiple approaches to solve complex computational challenges.
+            </p>
+          </div>
         </motion.div>
 
         {/* DSA Topics */}
@@ -81,10 +91,10 @@ const ProblemSolving = () => {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                whileHover={{ scale: 1.08, translateY: -4 }}
-                className="p-4 rounded-lg bg-dark-800 border border-dark-700 hover:border-accent/60 text-center transition-all cursor-default group"
+                whileHover={{ scale: 1.04, translateY: -3 }}
+                className="p-4 rounded-xl bg-[#071737]/75 backdrop-blur-md border border-white/15 hover:border-[#67E8F9]/60 text-center transition-all cursor-default group shadow-lg shadow-black/30"
               >
-                <span className="text-gray-300 font-medium group-hover:text-accent transition-colors">
+                <span className="text-[#E8F1FF] text-sm font-medium group-hover:text-[#67E8F9] transition-colors">
                   {topic}
                 </span>
               </motion.div>
@@ -96,18 +106,19 @@ const ProblemSolving = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           className="flex justify-center"
         >
           <a
-            href="https://leetcode.com/u/Mrinal444"
+            href="https://leetcode.com/u/s_mrinal"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent text-white font-medium hover:bg-accent-dark transition-all transform hover:-translate-y-0.5 shadow-lg shadow-accent/25"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#6366F1] hover:bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#6366F1]/30 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
           >
-            View LeetCode Profile
-            <FaExternalLinkAlt className="w-4 h-4" />
+            <SiLeetcode className="w-5 h-5 text-amber-400" />
+            <span>View LeetCode Profile</span>
+            <FaExternalLinkAlt className="w-3.5 h-3.5 opacity-80" />
           </a>
         </motion.div>
       </div>

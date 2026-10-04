@@ -1,72 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCheckCircle } from 'react-icons/fa';
+import projectsData from '../data/projects';
 
 const Projects = () => {
-  const projectsData = [
-    {
-      id: 1,
-      title: 'SkillOutcome',
-      subtitle: 'Employment Outcome & Skill Tracking Platform',
-      status: 'Currently Building',
-      statusColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
-      description:
-        'A comprehensive platform addressing Smart India Hackathon problem statement for tracking employment outcomes, skill gaps, and long-term livelihood impact of training programs.',
-      features: [
-        'Trainee tracking and profile management',
-        'Employment outcome monitoring',
-        'Skill gap identification',
-        'Long-term outcome tracking',
-        'Analytics dashboards',
-        'Training program effectiveness visualization',
-      ],
-      tech: ['React.js', 'Node.js', 'Supabase', 'PostgreSQL'],
-      github: 'https://github.com/Mrinal444',
-      demo: null,
-      featured: true,
-    },
-    {
-      id: 2,
-      title: 'SSC JE Mock Test Preparation',
-      subtitle: 'Modern Exam Preparation Platform',
-      status: 'In Development',
-      statusColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-      description:
-        'A focused and structured examination preparation platform designed for SSC JE aspirants with comprehensive practice and performance tracking.',
-      features: [
-        'Full-length mock tests',
-        'Subject-wise practice sections',
-        'Comprehensive question bank',
-        'Performance analytics',
-        'Test analysis with insights',
-        'Progress monitoring dashboard',
-      ],
-      tech: ['React.js'],
-      github: 'https://github.com/Mrinal444',
-      demo: null,
-    },
-    {
-      id: 3,
-      title: 'SIH Full-Stack Web Application',
-      subtitle: 'Smart India Hackathon Project',
-      status: 'Completed',
-      statusColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
-      description:
-        'A responsive full-stack application developed collaboratively under hackathon constraints, featuring user authentication and cloud-based data management.',
-      features: [
-        'Responsive frontend design',
-        'User authentication system',
-        'Login and signup functionality',
-        'Cloud-based user data storage',
-        'Database integration',
-        'Team collaboration workflow',
-      ],
-      tech: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Supabase', 'PostgreSQL'],
-      github: 'https://github.com/Mrinal444',
-      demo: null,
-    },
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -87,8 +24,21 @@ const Projects = () => {
     },
   };
 
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 'Currently Building':
+        return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
+      case 'In Development':
+        return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+      case 'Completed':
+        return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+      default:
+        return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40';
+    }
+  };
+
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-950">
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
         <motion.div
@@ -98,11 +48,17 @@ const Projects = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#67E8F9] shadow-[0_0_8px_#67E8F9]" />
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              Engineering Work & Problem Solving
+            </span>
+          </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Featured <span className="text-accent">Projects</span>
+            Featured <span className="text-[#67E8F9]">Projects</span>
           </h2>
-          <p className="text-gray-400 mt-4 text-lg">
-            Real-world applications and problem-solving in action.
+          <p className="text-[#E8F1FF] mt-4 text-lg font-medium max-w-2xl">
+            Practical software applications built with a focus on real-world utility, clean architecture, and structured problem-solving.
           </p>
         </motion.div>
 
@@ -118,61 +74,92 @@ const Projects = () => {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              whileHover={{ translateY: -8 }}
-              className={`group relative rounded-xl border overflow-hidden transition-all ${
-                project.featured
-                  ? 'lg:col-span-2 p-8 bg-gradient-to-br from-dark-800 to-dark-900 border-accent/30 hover:border-accent/60'
-                  : 'p-6 bg-dark-800 border-dark-700 hover:border-accent/40'
+              whileHover={{ translateY: -6 }}
+              className={`group relative rounded-2xl backdrop-blur-md border transition-all shadow-2xl shadow-black/50 ${
+                project.isFeatured
+                  ? 'lg:col-span-2 p-8 bg-[#071737]/85 border-white/20 hover:border-[#67E8F9]/60'
+                  : 'p-6 sm:p-8 bg-[#071737]/80 border-white/18 hover:border-[#67E8F9]/50'
               }`}
             >
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              {/* Subtle Gradient Glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#67E8F9]/0 via-[#67E8F9]/8 to-[#67E8F9]/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl" />
 
               <div className="relative z-10">
-                {/* Status Badge */}
-                <div className="flex items-center justify-between mb-4">
+                {/* Header: Status Badge & Project Type */}
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                   <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${project.statusColor}`}
+                    className={`inline-block px-3.5 py-1 rounded-full text-xs font-semibold border backdrop-blur-md ${getStatusBadge(
+                      project.status
+                    )}`}
                   >
                     {project.status}
                   </span>
+                  {project.type && (
+                    <span className="text-xs font-mono text-[#67E8F9] tracking-wider uppercase">
+                      {project.type}
+                    </span>
+                  )}
                 </div>
 
                 {/* Title & Subtitle */}
-                <h3 className="text-2xl font-bold text-white mb-1">{project.title}</h3>
-                <p className="text-accent text-sm font-medium mb-4">{project.subtitle}</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1.5">
+                  {project.title}
+                </h3>
+                <p className="text-[#67E8F9] text-sm sm:text-base font-semibold mb-4">
+                  {project.subtitle}
+                </p>
+
+                {/* Problem Statement Box */}
+                {project.problem && (
+                  <div className="p-4 rounded-xl bg-[#071737]/90 border border-white/12 backdrop-blur-md mb-5 shadow-inner">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#67E8F9] mb-1">
+                      Problem Context
+                    </p>
+                    <p className="text-xs sm:text-sm text-[#E8F1FF]/90 leading-relaxed font-normal">
+                      {project.problem}
+                    </p>
+                  </div>
+                )}
 
                 {/* Description */}
-                <p className="text-gray-300 mb-6 leading-relaxed">{project.description}</p>
+                <p className="text-[#E8F1FF] mb-6 leading-relaxed font-normal text-sm sm:text-base">
+                  {project.description}
+                </p>
 
-                {/* Features */}
-                <div className="mb-6">
-                  <p className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
-                    Key Features
-                  </p>
-                  <div className={`grid gap-2 ${project.featured ? 'grid-cols-2 md:grid-cols-3' : 'grid-cols-1'}`}>
-                    {project.features.map((feature, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-start gap-2 text-sm text-gray-400"
-                      >
-                        <span className="w-1 h-1 rounded-full bg-accent mt-1.5 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
+                {/* What I Built / Key Features */}
+                {project.whatIBuilt && project.whatIBuilt.length > 0 && (
+                  <div className="mb-6">
+                    <p className="text-xs uppercase tracking-wider text-[#67E8F9] font-bold mb-3">
+                      Key Highlights & Implementation
+                    </p>
+                    <div
+                      className={`grid gap-2.5 ${
+                        project.isFeatured ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'
+                      }`}
+                    >
+                      {project.whatIBuilt.map((point, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2.5 text-xs sm:text-sm text-[#E8F1FF]"
+                        >
+                          <FaCheckCircle className="w-3.5 h-3.5 text-[#67E8F9] mt-1 flex-shrink-0" />
+                          <span>{point}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Tech Stack */}
                 <div className="mb-6">
-                  <p className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
-                    Tech Stack
+                  <p className="text-xs uppercase tracking-wider text-[#67E8F9] font-bold mb-3">
+                    Technologies
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 rounded-lg bg-dark-700/50 border border-dark-600 text-xs text-gray-300 hover:border-accent/40 transition-colors"
+                        className="px-3.5 py-1.5 rounded-lg bg-[#071737]/90 border border-white/15 text-xs text-[#E8F1FF] font-medium hover:border-[#67E8F9]/50 transition-colors backdrop-blur-md shadow-sm"
                       >
                         {tech}
                       </span>
@@ -180,36 +167,28 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Buttons */}
-                <div className="flex gap-3">
+                {/* Project Links */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white font-medium hover:bg-accent-dark transition-all transform hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#6366F1] text-white text-sm font-semibold hover:bg-[#4F46E5] transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#6366F1]/30 cursor-pointer"
                   >
                     <FaGithub className="w-4 h-4" />
-                    GitHub
+                    <span>View on GitHub</span>
                   </a>
 
-                  {project.demo ? (
+                  {project.live && (
                     <a
-                      href={project.demo}
+                      href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-700 text-gray-300 border border-dark-600 font-medium hover:bg-dark-600 hover:text-white transition-all transform hover:-translate-y-0.5"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#071737]/90 text-[#E8F1FF] border border-white/20 text-sm font-semibold hover:bg-[#071737] hover:text-white hover:border-[#67E8F9]/50 transition-all transform hover:-translate-y-0.5 backdrop-blur-md shadow-md cursor-pointer"
                     >
-                      <FaExternalLinkAlt className="w-4 h-4" />
-                      Live Demo
+                      <FaExternalLinkAlt className="w-3.5 h-3.5 text-[#67E8F9]" />
+                      <span>Live Deployment</span>
                     </a>
-                  ) : (
-                    <button
-                      disabled
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-700/50 text-gray-500 border border-dark-600/50 font-medium cursor-not-allowed opacity-60"
-                    >
-                      <FaExternalLinkAlt className="w-4 h-4" />
-                      Demo (Coming)
-                    </button>
                   )}
                 </div>
               </div>

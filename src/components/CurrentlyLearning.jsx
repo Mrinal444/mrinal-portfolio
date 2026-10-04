@@ -32,7 +32,7 @@ const CurrentlyLearning = () => {
   };
 
   return (
-    <section id="learning" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-900">
+    <section id="learning" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <motion.div
@@ -43,9 +43,9 @@ const CurrentlyLearning = () => {
           className="mb-12 text-center"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            Currently <span className="text-accent">Exploring</span>
+            Currently <span className="text-[#67E8F9]">Exploring</span>
           </h2>
-          <p className="text-gray-400 mt-4 text-lg">
+          <p className="text-[#E8F1FF] mt-4 text-lg font-medium">
             Continuous learning and growth through new technologies and deeper understanding.
           </p>
         </motion.div>
@@ -63,11 +63,11 @@ const CurrentlyLearning = () => {
               key={idx}
               variants={itemVariants}
               whileHover={{ scale: 1.05, translateY: -6 }}
-              className="group p-5 rounded-lg bg-dark-800 border border-dark-700 hover:border-accent/40 transition-all cursor-default"
+              className="group p-5 rounded-2xl bg-[#071737]/80 backdrop-blur-md border border-white/18 hover:border-[#67E8F9]/50 transition-all cursor-default shadow-xl shadow-black/50"
             >
               <div className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-accent mt-1.5 flex-shrink-0 animate-pulse" />
-                <span className="text-gray-300 group-hover:text-white transition-colors font-medium">
+                <span className="w-2 h-2 rounded-full bg-[#67E8F9] mt-1.5 flex-shrink-0 shadow-[0_0_8px_#67E8F9]" />
+                <span className="text-[#E8F1FF] group-hover:text-white transition-colors font-medium">
                   {area}
                 </span>
               </div>
@@ -81,9 +81,9 @@ const CurrentlyLearning = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-12 p-6 rounded-xl bg-accent-glow border border-accent/20 text-center"
+          className="mt-12 p-6 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/20 text-center shadow-2xl shadow-black/50"
         >
-          <p className="text-gray-300 text-lg">
+          <p className="text-[#E8F1FF] text-lg font-medium leading-relaxed">
             Growing every day through hands-on projects, challenging problems, and real-world application development.
           </p>
         </motion.div>

@@ -38,7 +38,7 @@ const Education = () => {
   };
 
   return (
-    <section id="education" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-950">
+    <section id="education" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <motion.div
@@ -49,7 +49,7 @@ const Education = () => {
           className="mb-12"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-white">
-            <span className="text-accent">Education</span>
+            Academic <span className="text-[#67E8F9]">Education</span>
           </h2>
         </motion.div>
 
@@ -59,7 +59,7 @@ const Education = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="p-8 rounded-xl bg-dark-800 border border-dark-700 hover:border-accent/40 transition-all"
+          className="p-8 rounded-2xl bg-[#071737]/80 backdrop-blur-md border border-white/18 hover:border-[#67E8F9]/50 transition-all shadow-2xl shadow-black/50"
         >
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Left - Institution Info */}
@@ -67,18 +67,18 @@ const Education = () => {
               <h3 className="text-2xl font-bold text-white mb-2">
                 {education.institution}
               </h3>
-              <p className="text-accent text-lg font-semibold mb-1">
+              <p className="text-[#67E8F9] text-lg font-semibold mb-1">
                 {education.degree}
               </p>
-              <p className="text-gray-400 mb-6">
+              <p className="text-[#E8F1FF] mb-6 font-medium">
                 {education.duration}
               </p>
 
-              <div className="p-4 rounded-lg bg-dark-700/50 border border-dark-600 inline-block">
-                <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">
+              <div className="p-4 rounded-xl bg-[#071737]/90 border border-white/15 inline-block backdrop-blur-md shadow-inner">
+                <p className="text-xs text-[#67E8F9] uppercase tracking-wider font-bold mb-1">
                   CGPA
                 </p>
-                <p className="text-3xl font-bold text-accent">
+                <p className="text-3xl font-extrabold text-white">
                   {education.cgpa}
                 </p>
               </div>
@@ -86,7 +86,7 @@ const Education = () => {
 
             {/* Right - Relevant Coursework */}
             <div>
-              <p className="text-gray-400 uppercase text-xs tracking-wider font-semibold mb-4">
+              <p className="text-[#67E8F9] uppercase text-xs tracking-wider font-bold mb-4">
                 Relevant Areas of Study
               </p>
               <motion.div
@@ -102,8 +102,8 @@ const Education = () => {
                     variants={itemVariants}
                     className="flex items-center gap-3"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                    <span className="text-gray-300">{course}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#67E8F9] shadow-[0_0_6px_#67E8F9] flex-shrink-0" />
+                    <span className="text-[#E8F1FF] font-medium">{course}</span>
                   </motion.div>
                 ))}
               </motion.div>

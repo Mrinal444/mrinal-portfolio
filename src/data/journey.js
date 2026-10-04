@@ -1,30 +1,34 @@
 const journey = [
   {
     year: "2024",
-    title: "The Foundation",
+    title: "Beginning My Journey",
+    subtitle: "The Foundation",
     description:
-      "Started my Computer Science Engineering journey at KIIT. Focused on building strong programming and web development fundamentals with a deep focus on core concepts.",
-    tags: ["C / C++", "HTML & CSS", "JavaScript", "CS Basics"],
+      "Started my Computer Science Engineering journey at KIIT. Focused on building strong programming and web development fundamentals with a deep focus on core CS concepts.",
+    tags: ["C / C++", "HTML & CSS", "JavaScript", "Core CS Fundamentals"],
   },
   {
     year: "2025",
-    title: "Expansion & Application",
+    title: "Expanding Horizons",
+    subtitle: "Application & Collaboration",
     description:
-      "Expanded into Data Structures & Algorithms, Full-Stack Development, hackathons, and open source contributions. Built practical projects and collaborated with peers.",
-    tags: ["DSA Practice", "Full-Stack Dev", "GSSoC 2025", "Hacktoberfest"],
+      "Expanded into Data Structures & Algorithms, full-stack development, hackathons, and open-source contributions. Strengthened algorithmic problem-solving and built practical collaborative projects.",
+    tags: ["DSA Practice", "Full-Stack Dev", "GSSoC Contributor", "Hacktoberfest"],
   },
   {
     year: "2026",
-    title: "Impact & Scale",
+    title: "Building Impact",
+    subtitle: "Scale & Architecture",
     description:
-      "Currently working on larger and more impactful projects including SkillOutcome, the SSC JE Mock Test Preparation Platform, and advanced full-stack development.",
+      "Currently engineering larger and more impactful platforms including SkillOutcome and the SSC JE Mock Test Preparation Platform, focusing on advanced full-stack architecture and real-world utility.",
     tags: ["SkillOutcome", "SSC JE Platform", "Advanced Full-Stack", "System Design"],
   },
   {
-    year: "The Road Ahead",
+    year: "Road Ahead",
     title: "Continuous Growth",
+    subtitle: "Future Goals",
     description:
-      "Continuing toward Software Engineering internships, strengthening Data Structures & Algorithms, contributing to open source, competitive programming, and building scalable real-world products.",
+      "Aiming for software engineering internships, deepening DSA and algorithmic intuition, contributing to impactful open source, and architecting robust, scalable software products.",
     tags: ["SWE Internships", "DSA Mastery", "Open Source", "Scalable Systems"],
   },
 ];

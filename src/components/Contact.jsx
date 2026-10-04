@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
 const Contact = () => {
@@ -9,9 +9,10 @@ const Contact = () => {
     email: '',
     subject: '',
     message: '',
+    _honey: '', // Honeypot field for bot protection
   });
 
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -22,26 +23,63 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setStatus('');
+    setStatus({ type: '', message: '' });
+
+    // Spam honeypot check
+    if (formData._honey) {
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
+      setStatus({ type: 'error', message: 'Please fill in all fields before sending.' });
+      setLoading(false);
+      return;
+    }
 
     try {
-      // For now, just validate and show success message
-      // In production, you'd send this to a backend service
-      if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-        setStatus('Please fill in all fields.');
-        setLoading(false);
-        return;
+      // Send real email via FormSubmit AJAX service directly to Mrinal's Gmail
+      const response = await fetch('https://formsubmit.co/ajax/mrings98@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          Name: formData.name,
+          Email: formData.email,
+          _subject: `Portfolio Contact: ${formData.subject} (from ${formData.name})`,
+          Message: formData.message,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok || data.success === 'true' || data.success === true) {
+        setStatus({
+          type: 'success',
+          message: '✓ Message delivered successfully! Thank you for reaching out.',
+        });
+        setFormData({ name: '', email: '', subject: '', message: '', _honey: '' });
+      } else {
+        throw new Error(data.message || 'Submission failed');
       }
-
-      // Simulate sending email
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      setStatus('✓ Message sent successfully! I\'ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-
-      setTimeout(() => setStatus(''), 3000);
     } catch (error) {
-      setStatus('Failed to send message. Please try again.');
+      console.error('Contact Form Error:', error);
+      // Fallback: If offline or blocked by browser extensions, open user's mail client directly
+      const mailtoUrl = `mailto:mrings98@gmail.com?subject=${encodeURIComponent(
+        `Portfolio Inquiry: ${formData.subject}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+
+      setStatus({
+        type: 'info',
+        message: 'Direct API delivery unavailable. Click below to open your email client directly.',
+      });
+      window.open(mailtoUrl, '_blank');
     } finally {
       setLoading(false);
     }
@@ -71,7 +109,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-950">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <motion.div
@@ -81,11 +119,18 @@ const Contact = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#071737]/85 border border-white/20 backdrop-blur-md mb-4 shadow-sm">
+            <FaEnvelope className="w-3.5 h-3.5 text-[#67E8F9]" />
+            <span className="text-xs uppercase tracking-widest text-[#67E8F9] font-bold">
+              Get In Touch
+            </span>
+          </div>
+
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Let's Build Something <span className="text-accent">Interesting</span>.
+            Let's Build Something <span className="text-[#67E8F9]">Interesting</span>.
           </h2>
-          <p className="text-gray-400 text-lg">
-            I am open to learning opportunities, technical collaborations, hackathons, open-source contributions, and software development projects.
+          <p className="text-[#E8F1FF] text-base sm:text-lg font-medium max-w-2xl mx-auto">
+            I am open to software engineering internships, technical collaborations, hackathons, open-source projects, and engineering opportunities.
           </p>
         </motion.div>
 
@@ -97,64 +142,75 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="p-6 rounded-xl bg-dark-800 border border-dark-700"
+            className="p-6 sm:p-8 rounded-2xl bg-[#071737]/85 backdrop-blur-md border border-white/18 shadow-2xl shadow-black/50"
           >
+            {/* Hidden honeypot field */}
+            <input
+              type="text"
+              name="_honey"
+              value={formData._honey}
+              onChange={handleChange}
+              style={{ display: 'none' }}
+              tabIndex="-1"
+              autoComplete="off"
+            />
+
             <div className="mb-5">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Name
+              <label className="block text-sm font-semibold text-[#E8F1FF] mb-2">
+                Name <span className="text-[#67E8F9]">*</span>
               </label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#071737]/90 border border-white/15 text-white placeholder-[#E8F1FF]/40 focus:outline-none focus:border-[#67E8F9]/60 transition-colors backdrop-blur-md shadow-inner"
                 placeholder="Your name"
                 required
               />
             </div>
 
             <div className="mb-5">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Email
+              <label className="block text-sm font-semibold text-[#E8F1FF] mb-2">
+                Email <span className="text-[#67E8F9]">*</span>
               </label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
-                placeholder="your@email.com"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#071737]/90 border border-white/15 text-white placeholder-[#E8F1FF]/40 focus:outline-none focus:border-[#67E8F9]/60 transition-colors backdrop-blur-md shadow-inner"
+                placeholder="your.email@example.com"
                 required
               />
             </div>
 
             <div className="mb-5">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Subject
+              <label className="block text-sm font-semibold text-[#E8F1FF] mb-2">
+                Subject <span className="text-[#67E8F9]">*</span>
               </label>
               <input
                 type="text"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors"
-                placeholder="What's this about?"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#071737]/90 border border-white/15 text-white placeholder-[#E8F1FF]/40 focus:outline-none focus:border-[#67E8F9]/60 transition-colors backdrop-blur-md shadow-inner"
+                placeholder="Opportunity / Collaboration / Project"
                 required
               />
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Message
+              <label className="block text-sm font-semibold text-[#E8F1FF] mb-2">
+                Message <span className="text-[#67E8F9]">*</span>
               </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 rows="5"
-                className="w-full px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-colors resize-none"
-                placeholder="Tell me about your project or opportunity..."
+                className="w-full px-4 py-2.5 rounded-xl bg-[#071737]/90 border border-white/15 text-white placeholder-[#E8F1FF]/40 focus:outline-none focus:border-[#67E8F9]/60 transition-colors resize-none backdrop-blur-md shadow-inner"
+                placeholder="Tell me about your team, role, or project..."
                 required
               />
             </div>
@@ -164,21 +220,37 @@ const Contact = () => {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg bg-accent text-white font-medium hover:bg-accent-dark transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3.5 rounded-xl bg-[#6366F1] text-white font-semibold hover:bg-[#4F46E5] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#6366F1]/30 cursor-pointer flex items-center justify-center gap-2"
             >
-              {loading ? 'Sending...' : 'Send Message'}
+              {loading ? (
+                <span>Sending Message...</span>
+              ) : (
+                <>
+                  <FaPaperPlane className="w-4 h-4 text-[#67E8F9]" />
+                  <span>Send Message</span>
+                </>
+              )}
             </motion.button>
 
-            {status && (
-              <motion.p
+            {status.message && (
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mt-4 text-sm text-center ${
-                  status.startsWith('✓') ? 'text-emerald-400' : 'text-amber-400'
+                className={`mt-4 p-3.5 rounded-xl border flex items-center gap-2.5 text-xs sm:text-sm font-medium ${
+                  status.type === 'success'
+                    ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
+                    : status.type === 'error'
+                    ? 'bg-red-500/15 border-red-500/40 text-red-300'
+                    : 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300'
                 }`}
               >
-                {status}
-              </motion.p>
+                {status.type === 'success' ? (
+                  <FaCheckCircle className="w-4 h-4 flex-shrink-0" />
+                ) : (
+                  <FaExclamationCircle className="w-4 h-4 flex-shrink-0" />
+                )}
+                <span>{status.message}</span>
+              </motion.div>
             )}
           </motion.form>
 
@@ -190,41 +262,48 @@ const Contact = () => {
             viewport={{ once: true }}
             className="flex flex-col justify-between"
           >
-            {/* Quick Links */}
+            {/* Direct Communication Channels */}
             <div className="space-y-6 mb-8">
               <div>
-                <p className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
-                  Quick Links
+                <p className="text-xs uppercase tracking-wider text-[#67E8F9] font-bold mb-3">
+                  Direct Inquiries
                 </p>
                 <div className="space-y-3">
                   <a
                     href="mailto:mrings98@gmail.com"
-                    className="flex items-center gap-3 text-gray-300 hover:text-accent transition-colors group"
+                    className="flex items-center gap-3.5 text-[#E8F1FF] hover:text-[#67E8F9] transition-colors group p-4 rounded-xl bg-[#071737]/80 border border-white/18 backdrop-blur-md shadow-md hover:border-[#67E8F9]/50"
                   >
-                    <span className="w-8 h-8 rounded-lg bg-dark-700 flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                    <span className="w-9 h-9 rounded-lg bg-[#071737] flex items-center justify-center group-hover:bg-[#67E8F9]/20 transition-colors text-[#67E8F9]">
                       <FaEnvelope className="w-4 h-4" />
                     </span>
-                    mrings98@gmail.com
+                    <div>
+                      <p className="text-xs text-[#67E8F9] font-semibold uppercase tracking-wider">Email Address</p>
+                      <p className="font-semibold text-white">mrings98@gmail.com</p>
+                    </div>
                   </a>
+
                   <a
                     href="https://github.com/Mrinal444"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-gray-300 hover:text-accent transition-colors group"
+                    className="flex items-center gap-3.5 text-[#E8F1FF] hover:text-[#67E8F9] transition-colors group p-4 rounded-xl bg-[#071737]/80 border border-white/18 backdrop-blur-md shadow-md hover:border-[#67E8F9]/50"
                   >
-                    <span className="w-8 h-8 rounded-lg bg-dark-700 flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                    <span className="w-9 h-9 rounded-lg bg-[#071737] flex items-center justify-center group-hover:bg-[#67E8F9]/20 transition-colors text-[#67E8F9]">
                       <FaGithub className="w-4 h-4" />
                     </span>
-                    github.com/Mrinal444
+                    <div>
+                      <p className="text-xs text-[#67E8F9] font-semibold uppercase tracking-wider">GitHub Profile</p>
+                      <p className="font-semibold text-white">github.com/Mrinal444</p>
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Social Links */}
+            {/* Social & Professional Presence */}
             <div>
-              <p className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-4">
-                Connect
+              <p className="text-xs uppercase tracking-wider text-[#67E8F9] font-bold mb-4">
+                Professional Presence
               </p>
               <div className="flex gap-4">
                 {socialLinks.map((social) => {
@@ -236,7 +315,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="p-4 rounded-lg bg-dark-800 border border-dark-700 text-gray-400 hover:text-accent hover:border-accent/40 transition-all transform hover:-translate-y-1"
+                      className="p-4 rounded-xl bg-[#071737]/80 backdrop-blur-md border border-white/18 text-[#E8F1FF] hover:text-[#67E8F9] hover:border-[#67E8F9]/50 transition-all transform hover:-translate-y-1 shadow-lg shadow-black/40"
                     >
                       <Icon className="w-5 h-5" />
                     </a>
